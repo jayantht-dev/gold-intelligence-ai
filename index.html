@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#08121b">
+  <meta name="description" content="Gold Intelligence AI — Indian gold market dashboard">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Gold Intelligence AI</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Gold Intelligence home">
+        <span class="brand-mark">Au</span>
+        <span><b>GOLD INTELLIGENCE</b><small>INDIA · MARKET DESK</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="feed-status"><i id="feedDot"></i><span id="feedStatus">Demo mode</span></span>
+        <button class="icon-btn" id="refreshBtn" aria-label="Refresh data">↻</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">PRECIOUS METALS MONITOR</div>
+        <h1>Know the market.<br><em>Not just the price.</em></h1>
+        <p>Spot gold intelligence for Indian investors.</p>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <div><div class="eyebrow">MARKET SNAPSHOT</div><h2>Gold prices</h2></div>
+          <span class="updated" id="updatedAt">Waiting for data</span>
+        </div>
+        <div class="price-grid">
+          <article class="price-card">
+            <div class="price-top"><b>24K GOLD</b><span class="live-pill"><i></i> <span id="priceMode">DEMO</span></span></div>
+            <p class="purity">999 purity · indicative spot-derived</p>
+            <div class="price" id="price24">₹ 7,250</div>
+            <div class="price-unit">per gram <span id="change24" class="change">—</span></div>
+            <div class="card-foot">Indicative INR price · GST and dealer premium excluded</div>
+          </article>
+          <article class="price-card secondary">
+            <div class="price-top"><b>22K GOLD</b><span class="karat-pill">22K</span></div>
+            <p class="purity">916.7 purity · spot-derived</p>
+            <div class="price" id="price22">₹ 6,646</div>
+            <div class="price-unit">per gram <span id="change22" class="change">—</span></div>
+            <div class="card-foot">Indicative estimate · not a jeweller quote</div>
+          </article>
+        </div>
+        <div class="notice"><b>Price note</b><span>These are indicative spot-derived estimates. Actual Chennai retail prices can differ due to GST, local premiums, dealer spreads and making charges.</span></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><div class="eyebrow">MARKET PULSE</div><h2>Price history</h2></div><span class="muted">Indicative · INR/g</span></div>
+        <div class="chart-card">
+          <div class="chart-head"><b>24K trend</b><span id="chartRange">Recent observations</span></div>
+          <svg id="priceChart" viewBox="0 0 600 190" role="img" aria-label="Gold price trend chart"></svg>
+          <div class="chart-labels"><span>Earlier</span><span>Latest</span></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><div class="eyebrow">AI MARKET DESK</div><h2>Market outlook</h2></div><span class="ai-tag">AI INSIGHT</span></div>
+        <article class="analysis-card">
+          <div class="verdict-row"><span class="verdict" id="verdict">WAIT</span><span class="confidence" id="confidence">Illustrative view</span></div>
+          <h3 id="analysisTitle">Connect a market feed for a current assessment</h3>
+          <p id="analysisText">This preview is educational and not a live recommendation. Once connected, the analyst can evaluate price movement and available market context.</p>
+          <div class="factors" id="factors"><span>USD / INR</span><span>Global spot</span><span>Market news</span></div>
+          <small>AI output is informational, may be wrong, and is not personalised financial advice.</small>
+        </article>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><div class="eyebrow">WHAT MOVES GOLD</div><h2>Market news</h2></div><span class="muted">Latest feed</span></div>
+        <div id="newsList" class="news-list">
+          <article class="news-item"><span class="news-type">WATCHLIST</span><b>US inflation and Federal Reserve rate expectations</b><p>These can influence real yields, the US dollar and global gold demand.</p></article>
+          <article class="news-item"><span class="news-type">WATCHLIST</span><b>US employment data</b><p>Stronger or weaker labour-market data can shift expectations for interest rates.</p></article>
+          <article class="news-item"><span class="news-type">WATCHLIST</span><b>USD/INR exchange rate</b><p>A weaker rupee can lift Indian gold prices even when global gold is unchanged.</p></article>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><div class="eyebrow">PERSONAL WATCH</div><h2>Price alerts</h2></div></div>
+        <div class="alert-card">
+          <label for="targetPrice">Notify me when 24K price reaches (₹/g)</label>
+          <div class="alert-controls"><input id="targetPrice" type="number" min="1" step="1" placeholder="e.g. 7200"><button id="saveAlert">Save alert</button></div>
+          <p id="alertMessage" class="muted">Alert is checked while this app is open. Background notifications require additional push-service setup.</p>
+        </div>
+      </section>
+
+      <section class="section-block setup-section">
+        <details>
+          <summary><span><span class="eyebrow">PRIVATE DATA CONNECTION</span><b>Connect your market feed</b></span><span class="setup-chevron">＋</span></summary>
+          <p>Enter the HTTPS address of your deployed Gold Intelligence backend. API keys stay on that server, not in this app.</p>
+          <label for="backendUrl">Backend HTTPS URL</label>
+          <div class="url-row"><input id="backendUrl" type="url" placeholder="https://your-gold-api.example.com"><button id="connectBtn">Connect</button></div>
+          <div id="connectionMessage" class="muted" role="status">Not connected. Demo values are not live market prices.</div>
+          <button class="text-button" id="clearBackend">Clear saved connection</button>
+        </details>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a href="#top" class="nav-item active"><span>◇</span>Overview</a>
+      <a href="#newsList" class="nav-item"><span>▤</span>News</a>
+      <a href="#verdict" class="nav-item"><span>✦</span>AI Analyst</a>
+      <a href="#targetPrice" class="nav-item"><span>◎</span>Alerts</a>
+    </nav>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
